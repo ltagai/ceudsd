@@ -24,10 +24,6 @@ Order by a multiple fields
 
 `SELECT state, cost FROM birdstrikes ORDER BY state, cost LIMIT 10;`
 
-Order by a multiple fields
-
-`SELECT state, cost FROM birdstrikes ORDER BY state, cost LIMIT 10;`
-
 Reverse ordering
 
 `SELECT state, cost FROM birdstrikes ORDER BY cost DESC;`
@@ -37,7 +33,9 @@ Reverse ordering by multple fields
 `SELECT state, cost FROM birdstrikes ORDER BY state DESC, cost;`
 
 ## Renaming fields in the output
-`SELECT bird_size as size, state FROM birdstrikes`
+`SELECT bird_size as size, state FROM birdstrikes;`
+
+### Note: Our Zeppelin exercise platform seemingly limits this functionality.
 
 ## Filtering data
 Filter by field value
@@ -52,54 +50,42 @@ Filter by multiple conditions
 
 `SELECT * FROM birdstrikes WHERE state IN ('Alabama', 'Missouri');`
 
+`SELECT * FROM birdstrikes WHERE state != 'Alabama';`
+
 String operations:
 
 `SELECT state FROM birdstrikes WHERE state LIKE 'A%' OR state LIKE '%a';`
 
-`SELECT state FROM birdstrikes WHERE LOWER(state) = 'alabama';`
+### Note: Case insensitivity.
 
-Lowercase: `LOWER`
-Uppercase: `UPPER`
-
-```
-SELECT EXTRACT(DOW FROM flight_date) as day_of_week, * FROM birdstrikes
-```
-
-It can go complicated:
-
-```
-SELECT state, cost, bird_size FROM birdstrikes
-WHERE (LOWER(state) = 'alabama'
-        OR LOWER(state) = 'missoury')
-      AND (bird_size = 'Small')
-ORDER BY cost DESC;
-```
+`SELECT state FROM birdstrikes WHERE state LIKE 'A%'`
 
 ## Removing duplicates
-`SELECT DISTINCT state, size FROM birdstrikes;`
+
+`SELECT DISTINCT bird_size FROM birdstrikes;`
+
+### Selecting unique pairs
+
+`SELECT DISTINCT state, bird_size FROM birdstrikes;`
+
+### Exercise: How do you filter out all records which have no state or no bird_size specified?
 
 ## WORKSHOP
 * What's the maximum overall cost
 * ^^ In which state did this accident happen?
-* Display the first three states in alphabetical order?
-* Display the bird sizes (don't display the "empty" cell)
+* Display the first three states in alphabetical order
 * What is the size of the bird that caused the biggest damage in Missouri?
 
 ## SOME more DML
 
 Updating
 ```
-UPDATE birdstrikes SET aircraft='Unknown' WHERE aircraft IS NULL;
+UPDATE birdstrikes SET aircraft='Unknown' WHERE aircraft = '';
 ```
 
 Deleting
 ```
 DELETE FROM birdstrikes WHERE aircraft = 'Unknown';
-```
-
-Truncating
-```
-TRUNCATE birdstrikes;
 ```
 
 ## Groupping and aggregation
@@ -145,33 +131,13 @@ SELECT state, COUNT(*) FROM birdstrikes GROUP BY state HAVING COUNT(*) > 100;
 
 ```
 SELECT state, COUNT(*) FROM birdstrikes
-WHERE state IS NOT NULL
+WHERE state != ''
 GROUP BY state HAVING COUNT(*) > 100;
 ```
 
-## JOINING
-```
-SELECT * FROM emberek
-JOIN varosok ON (emberek.varos_id = varosok.id);
-```
+## Homework
 
-```
-SELECT * FROM emberek
-INNER JOIN varosok ON (emberek.varos_id = varosok.id);
-```
+You need to use Google to find out how to solve this problem.
 
-```
-SELECT * FROM emberek
-LEFT JOIN varosok ON (emberek.varos_id = varosok.id);
-```
-
-```
-SELECT * FROM emberek
-RIGHT JOIN varosok ON (emberek.varos_id = varosok.id);
-```
-
-```
-SELECT * FROM emberek
-FULL OUTER JOIN varosok ON (emberek.varos_id = varosok.id);
-```
-
+1. You have to create 1 table with the name 'user' in your own database with 2 columns: ID Integer NOT NULL, USERNAME VARCHAR(255) NOT NULL
+2. After the table is create you will have to insert in your table 1 sinlge user. 
