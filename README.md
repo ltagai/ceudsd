@@ -1,3 +1,3 @@
 # CEU DSD Repository
 
-This repository contains the files needed for the DSD seminars at CEU.
+This repository contains the files from the DSD seminars.
