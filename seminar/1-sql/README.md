@@ -70,74 +70,59 @@ String operations:
 
 ### Exercise: How do you filter out all records which have no state or no bird_size specified?
 
-## WORKSHOP
+## Workshop
 * What's the maximum overall cost
-* ^^ In which state did this accident happen?
+  * In which state did this accident happen?
 * Display the first three states in alphabetical order
 * What is the size of the bird that caused the biggest damage in Missouri?
 
-## SOME more DML
+## A couple of more SQL statements
 
-Updating
-```
-UPDATE birdstrikes SET aircraft='Unknown' WHERE aircraft = '';
-```
+Updating some records
 
-Deleting
-```
-DELETE FROM birdstrikes WHERE aircraft = 'Unknown';
-```
+`UPDATE birdstrikes SET aircraft='Unknown' WHERE aircraft = ''`
+
+Deleting some records
+
+`DELETE FROM birdstrikes WHERE aircraft = 'Unknown'`
 
 ## Groupping and aggregation
 
-COUNT(*)
-```
-SELECT COUNT(*) FROM birdstrikes
-```
+Countint the number of records
+
+`SELECT COUNT(*) FROM birdstrikes`
 
 Simple aggregations
-```
-SELECT MAX(cost) FROM birdstrikes
-```
 
-```
-SELECT state, MAX(cost) AS max_cost FROM birdstrikes GROUP BY state ORDER BY state
-```
+`SELECT MAX(cost) FROM birdstrikes`
+
+`SELECT state, MAX(cost) AS max_cost FROM birdstrikes GROUP BY state ORDER BY state`
 
 Multiple aggregate functions:
-```
-SELECT state, aircraft, COUNT(*), MAX(cost), MIN(cost), AVG(cost) FROM birdstrikes WHERE state LIKE 'A%' GROUP BY state, aircraft ORDER BY state, aircraft
-```
+
+`SELECT state, aircraft, COUNT(*), MAX(cost), MIN(cost), AVG(cost) FROM birdstrikes WHERE state LIKE 'A%' GROUP BY state, aircraft ORDER BY state, aircraft`
 
 **Sometimes it doesn't work**:
-```
-SELECT aircraft, state, MAX(cost) AS max_cost FROM birdstrikes GROUP BY state ORDER BY state
-```
+
+`SELECT aircraft, state, MAX(cost) AS max_cost FROM birdstrikes GROUP BY state ORDER BY state`
 
 Let's fix it:
-```
-SELECT state, aircraft, MAX(cost) AS max_cost FROM birdstrikes GROUP BY state, aircraft ORDER BY state, aircraft
-```
+`SELECT state, aircraft, MAX(cost) AS max_cost FROM birdstrikes GROUP BY state, aircraft ORDER BY state, aircraft`
 
 You can filter here, too:
-```
-SELECT state, aircraft, MAX(cost) AS max_cost FROM birdstrikes WHERE state LIKE 'A%' GROUP BY state, aircraft ORDER BY state, aircraft
-```
+`SELECT state, aircraft, MAX(cost) AS max_cost FROM birdstrikes WHERE state LIKE 'A%' GROUP BY state, aircraft ORDER BY state, aircraft`
 
 Advanced groupping - HAVING
-```
-SELECT state, COUNT(*) FROM birdstrikes GROUP BY state HAVING COUNT(*) > 100
-```
+`SELECT state, COUNT(*) FROM birdstrikes GROUP BY state HAVING COUNT(*) > 100`
 
-```
-SELECT state, COUNT(*) FROM birdstrikes
+`SELECT state, COUNT(*) FROM birdstrikes
 WHERE state != ''
-GROUP BY state HAVING COUNT(*) > 100
-```
+GROUP BY state HAVING COUNT(*) > 100`
 
 ## Homework
 
 You need to use Google to find out how to solve this problem.
 
-1. You have to create 1 table with the name 'user' in your own database with 2 columns: ID Integer NOT NULL, USERNAME VARCHAR(255) NOT NULL
+1. You have to create 1 table in your own database. The table's name should be `User`, and should have 2 columns: ID Integer NOT NULL, USERNAME VARCHAR(255) NOT NULL (Hint:, there is a create_birdstrikes.sql in this git repository)
 2. After the table is create you will have to insert in your table 1 sinlge user. 
+3. Send these SQL statements to me either on Slack (Szilveszter Molnar) or in e-mail (MolnarSzi@ceu.edu)
