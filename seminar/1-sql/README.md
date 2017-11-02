@@ -4,57 +4,57 @@
 
 Select all data
 
-`SELECT * FROM birdstrikes;`
+`SELECT * FROM birdstrikes`
 
 Select all & limit
 
-`SELECT * FROM birdstrikes LIMIT 10;`
+`SELECT * FROM birdstrikes LIMIT 10`
 
 Select certain fields
 
-`SELECT bird_size, cost FROM birdstrikes LIMIT 10;`
+`SELECT bird_size, cost FROM birdstrikes LIMIT 10`
 
 ## Ordering data
 
 Order by a field
 
-`SELECT state, cost FROM birdstrikes ORDER BY cost LIMIT 10;`
+`SELECT state, cost FROM birdstrikes ORDER BY cost LIMIT 10`
 
 Order by a multiple fields
 
-`SELECT state, cost FROM birdstrikes ORDER BY state, cost LIMIT 10;`
+`SELECT state, cost FROM birdstrikes ORDER BY state, cost LIMIT 10`
 
 Reverse ordering
 
-`SELECT state, cost FROM birdstrikes ORDER BY cost DESC;`
+`SELECT state, cost FROM birdstrikes ORDER BY cost DESC`
 
 Reverse ordering by multple fields
 
-`SELECT state, cost FROM birdstrikes ORDER BY state DESC, cost;`
+`SELECT state, cost FROM birdstrikes ORDER BY state DESC, cost`
 
 ## Renaming fields in the output
-`SELECT bird_size as size, state FROM birdstrikes;`
+`SELECT bird_size as size, state FROM birdstrikes`
 
 ### Note: Our Zeppelin exercise platform seemingly limits this functionality.
 
 ## Filtering data
 Filter by field value
 
-`SELECT * FROM birdstrikes WHERE state = 'Alabama';`
+`SELECT * FROM birdstrikes WHERE state = 'Alabama'`
 
 Filter by multiple conditions
 
-`SELECT * FROM birdstrikes WHERE state = 'Alabama' AND bird_size = 'Small';`
+`SELECT * FROM birdstrikes WHERE state = 'Alabama' AND bird_size = 'Small'`
 
-`SELECT * FROM birdstrikes WHERE state = 'Alabama' OR state = 'Missouri';`
+`SELECT * FROM birdstrikes WHERE state = 'Alabama' OR state = 'Missouri'`
 
-`SELECT * FROM birdstrikes WHERE state IN ('Alabama', 'Missouri');`
+`SELECT * FROM birdstrikes WHERE state IN ('Alabama', 'Missouri')`
 
-`SELECT * FROM birdstrikes WHERE state != 'Alabama';`
+`SELECT * FROM birdstrikes WHERE state != 'Alabama'`
 
 String operations:
 
-`SELECT state FROM birdstrikes WHERE state LIKE 'A%' OR state LIKE '%a';`
+`SELECT state FROM birdstrikes WHERE state LIKE 'A%' OR state LIKE '%a'`
 
 ### Note: Case insensitivity.
 
@@ -62,11 +62,11 @@ String operations:
 
 ## Removing duplicates
 
-`SELECT DISTINCT bird_size FROM birdstrikes;`
+`SELECT DISTINCT bird_size FROM birdstrikes`
 
 ### Selecting unique pairs
 
-`SELECT DISTINCT state, bird_size FROM birdstrikes;`
+`SELECT DISTINCT state, bird_size FROM birdstrikes`
 
 ### Exercise: How do you filter out all records which have no state or no bird_size specified?
 
@@ -92,7 +92,7 @@ DELETE FROM birdstrikes WHERE aircraft = 'Unknown';
 
 COUNT(*)
 ```
-SELECT COUNT(*) FROM birdstrikes;
+SELECT COUNT(*) FROM birdstrikes
 ```
 
 Simple aggregations
@@ -101,7 +101,7 @@ SELECT MAX(cost) FROM birdstrikes
 ```
 
 ```
-SELECT state, MAX(cost) AS max_cost FROM birdstrikes GROUP BY state ORDER BY state;
+SELECT state, MAX(cost) AS max_cost FROM birdstrikes GROUP BY state ORDER BY state
 ```
 
 Multiple aggregate functions:
@@ -111,7 +111,7 @@ SELECT state, aircraft, COUNT(*), MAX(cost), MIN(cost), AVG(cost) FROM birdstrik
 
 **Sometimes it doesn't work**:
 ```
-SELECT aircraft, state, MAX(cost) AS max_cost FROM birdstrikes GROUP BY state ORDER BY state;
+SELECT aircraft, state, MAX(cost) AS max_cost FROM birdstrikes GROUP BY state ORDER BY state
 ```
 
 Let's fix it:
@@ -126,13 +126,13 @@ SELECT state, aircraft, MAX(cost) AS max_cost FROM birdstrikes WHERE state LIKE 
 
 Advanced groupping - HAVING
 ```
-SELECT state, COUNT(*) FROM birdstrikes GROUP BY state HAVING COUNT(*) > 100;
+SELECT state, COUNT(*) FROM birdstrikes GROUP BY state HAVING COUNT(*) > 100
 ```
 
 ```
 SELECT state, COUNT(*) FROM birdstrikes
 WHERE state != ''
-GROUP BY state HAVING COUNT(*) > 100;
+GROUP BY state HAVING COUNT(*) > 100
 ```
 
 ## Homework
